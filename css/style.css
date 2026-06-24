@@ -140,7 +140,7 @@ ul { list-style: none; }
 .hero-section {
     height: 80vh; /* 80% من ارتفاع الشاشة */
     /* تم إصلاح المسار هنا ليشير إلى مجلد IMG بشكل صحيح */
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../IMG/BACK.jpg'); 
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../img/back.jpg'); 
     background-size: cover;
     background-position: center;
     display: flex;
