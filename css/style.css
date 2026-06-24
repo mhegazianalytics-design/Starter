@@ -1,0 +1,509 @@
+/* ================= المتغيرات والألوان (نظام الـ 3 ألوان) ================= */
+:root {
+    /* 1. اللون الأساسي (الخلفية الداكنة) */
+    --bg-main: #121212;      /* أسود غير حالك لراحة العين */
+    --bg-card: #1E1E1E;      /* رمادي داكن لكروت الطعام */
+    
+    /* 2. اللون الرئيسي (التركواز - مستوحى من كلمة FOUR) */
+    --color-primary: #00BFA5; 
+    
+    /* 3. لون التمييز (الأرجواني - مستوحى من حرف X) */
+    --color-accent: #9C27B0;
+    
+    /* ألوان النصوص */
+    --text-white: #FFFFFF;
+    --text-gray: #B0B0B0;
+}
+
+/* ================= تنسيقات الصور داخل الكروت ================= */
+
+/* إلغاء الـ padding القديم للكروت التي تحتوي على صور لتملأ العرض */
+.category-card.with-image {
+    padding: 0 !important; 
+    overflow: hidden; /* لضمان قص الصورة مع الحواف */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* لملء العرض */
+}
+
+/* تنسيق الصورة نفسها */
+.card-img {
+    width: 100%;
+    height: 180px; /* ارتفاع ثابت للصورة */
+    object-fit: cover; /* لملء المساحة دون مط الصورة */
+    transition: transform 0.5s ease;
+}
+
+/* تكبير الصورة قليلاً عند الوقوف عليها */
+.category-card:hover .card-img {
+    transform: scale(1.1);
+}
+
+/* تنسيق النصوص أسفل الصورة */
+.card-details {
+    padding: 20px;
+    text-align: center;
+    background: var(--bg-card); /* ضمان لون الخلفية */
+    z-index: 1; /* لتظهر فوق الخلفية */
+    position: relative;
+}
+
+/* تعديل بسيط للنصوص لتبدو أجمل مع الصور */
+.card-details h3 {
+    margin-bottom: 8px;
+    color: var(--color-primary);
+}
+
+/* ================= التنسيقات العامة (Global Reset) ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Cairo', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-white);
+    line-height: 1.6;
+    overflow-x: hidden; /* منع التمرير الأفقي */
+}
+
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+ul { list-style: none; }
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* ================= 1. الهيدر (Header) ================= */
+.main-header {
+    background-color: rgba(18, 18, 18, 0.95); /* خلفية شبه شفافة */
+    padding: 15px 0;
+    position: fixed; /* ثابت عند التمرير */
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--color-primary);
+}
+
+.logo span {
+    color: var(--color-accent); /* حرف X باللون الأرجواني */
+    font-size: 32px;
+}
+
+.navbar ul {
+    display: flex;
+    gap: 20px;
+}
+
+.navbar a {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.navbar a:hover {
+    color: var(--color-primary);
+}
+
+/* زر الهامبرغر (مخفي في الشاشات الكبيرة) */
+.hamburger {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--color-primary);
+}
+
+/* ================= 2. قسم الترحيب (Hero Section) ================= */
+.hero-section {
+    height: 80vh; /* 80% من ارتفاع الشاشة */
+    /* تم إصلاح المسار هنا ليشير إلى مجلد IMG بشكل صحيح */
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('../IMG/BACK.jpg'); 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-top: 60px; /* لتعويض مساحة الهيدر الثابت */
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero-content .brand-name {
+    color: var(--color-primary);
+}
+
+.tagline {
+    font-size: 1.5rem;
+    color: var(--text-gray);
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.cta-button {
+    background-color: var(--color-primary);
+    color: #000;
+    padding: 12px 30px;
+    font-weight: bold;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    box-shadow: 0 0 15px rgba(0, 191, 165, 0.4);
+}
+
+.cta-button:hover {
+    background-color: var(--text-white);
+    color: var(--color-primary);
+    transform: scale(1.05);
+}
+
+/* ================= 3. قسم المنيو (Menu Section) ================= */
+.menu-section {
+    padding: 60px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: var(--color-primary);
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60%;
+    height: 3px;
+    background-color: var(--color-accent);
+    margin: 10px auto 0;
+}
+
+/* أزرار الفلترة */
+.menu-filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    background: transparent;
+    border: 2px solid var(--color-primary);
+    color: var(--text-white);
+    padding: 8px 25px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.filter-btn:hover, .filter-btn.active {
+    background-color: var(--color-primary);
+    color: #000;
+}
+
+/* تنسيق فئات الطعام */
+.menu-category {
+    margin-bottom: 50px;
+}
+
+.category-title {
+    font-size: 1.8rem;
+    color: var(--color-accent);
+    border-right: 5px solid var(--color-primary);
+    padding-right: 15px;
+    margin-bottom: 25px;
+}
+
+/* شبكة عرض الأصناف */
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* متجاوب تلقائياً */
+    gap: 20px;
+}
+
+/* كارت الصنف الواحد */
+.menu-item {
+    background-color: var(--bg-card);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #333;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-primary);
+}
+
+.item-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--text-white);
+}
+
+.item-info .description {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+}
+
+.item-price {
+    color: var(--color-primary);
+    font-weight: 900;
+    font-size: 1.2rem;
+    text-align: left;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column; /* لترتيب الأسعار (L, XL) تحت بعض */
+    align-items: flex-end;
+}
+
+.item-price .size {
+    font-size: 1rem;
+    color: var(--color-accent);
+}
+
+/* ================= 4. الفوتر (Footer) ================= */
+.main-footer {
+    background-color: #000;
+    padding: 40px 0 20px;
+    text-align: center;
+    border-top: 3px solid var(--color-accent);
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-content h3 {
+    color: var(--color-primary);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+.footer-content p {
+    color: var(--text-gray);
+    margin-bottom: 10px;
+}
+
+.social-links a {
+    font-size: 1.8rem;
+    color: var(--text-white);
+    margin: 0 10px;
+}
+
+.social-links a:hover {
+    color: var(--color-accent);
+}
+
+.copyright {
+    border-top: 1px solid #333;
+    padding-top: 20px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* ================= تنسيقات كروت الأقسام (للصفحة الرئيسية) ================= */
+
+.category-card {
+    background-color: var(--bg-card);
+    border: 1px solid #333;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex; /* لترتيب العناصر عمودياً */
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* تأثير عند المرور بالماوس */
+.category-card:hover {
+    transform: translateY(-10px); /* يرتفع للأعلى */
+    border-color: var(--color-primary); /* يضيء الإطار */
+    box-shadow: 0 10px 20px rgba(0, 191, 165, 0.1); /* ظل خفيف */
+}
+
+/* أيقونة القسم الكبيرة */
+.category-card .card-icon {
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+/* عنوان القسم */
+.category-card h3 {
+    font-size: 1.5rem;
+    color: var(--text-white);
+}
+
+/* وصف مختصر */
+.category-card p {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+/* سهم صغير يظهر عند الهوفر */
+.arrow-icon {
+    margin-top: auto; /* يدفعه للأسفل */
+    color: var(--color-accent);
+    font-size: 1.2rem;
+    opacity: 0; /* مخفي افتراضياً */
+    transform: translateX(10px);
+    transition: 0.3s;
+}
+
+.category-card:hover .arrow-icon {
+    opacity: 1; /* يظهر */
+    transform: translateX(0);
+}
+
+/* ================= تنسيقات الصفحات الداخلية (الأطباق الرئيسية وغيرها) ================= */
+
+/* 1. رأس الصفحة الداخلي (بديل صورة الهيرو الكبيرة) */
+.page-header {
+    margin-top: 80px; /* مسافة لتعويض الهيدر الثابت */
+    padding: 40px 0;
+    text-align: center;
+    background-color: #1a1a1a; /* لون خلفية مختلف قليلاً لتمييز العنوان */
+    border-bottom: 2px solid var(--color-primary);
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    color: var(--text-white);
+    margin-bottom: 15px;
+}
+
+/* 2. زر الرجوع للقائمة */
+.back-btn {
+    display: inline-block;
+    color: var(--color-primary); /* لون النص تركواز */
+    font-weight: bold;
+    border: 2px solid var(--color-primary);
+    padding: 8px 25px;
+    border-radius: 30px;
+    transition: 0.3s;
+    font-size: 0.9rem;
+}
+
+.back-btn:hover {
+    background-color: var(--color-primary);
+    color: #000; /* النص يصبح أسود عند التحويم */
+    text-decoration: none;
+}
+
+/* 3. ملاحظة المنيو (الموجودة في الأطباق الرئيسية) */
+.menu-note {
+    background-color: rgba(156, 39, 176, 0.1); /* خلفية بنفسجية شفافة */
+    border: 1px dashed var(--color-accent); /* إطار متقطع بنفسجي */
+    color: var(--text-white);
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.menu-note i {
+    color: var(--color-primary);
+    margin-left: 10px;
+}
+
+/* 4. تمييز الأصناف الخاصة (مثل طاجن السعادة) */
+.special-item {
+    border: 2px solid var(--color-accent); /* إطار بنفسجي واضح */
+    box-shadow: 0 0 15px rgba(156, 39, 176, 0.2); /* توهج خفيف */
+    position: relative; /* ضروري لضبط أي عناصر إضافية */
+}
+
+/* ================= التجاوب مع الموبايل (Responsive) ================= */
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2rem; }
+    
+    .item-price { font-size: 1rem; }
+
+    /* إظهار زر الهامبرغر */
+    .hamburger {
+        display: block;
+    }
+
+    /* تحريك خطوط الهامبرغر عند التفعيل */
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* قائمة الموبايل */
+    .navbar ul {
+        position: fixed;
+        left: -100%; /* مخفية خارج الشاشة */
+        top: 70px; /* تحت الهيدر مباشرة */
+        gap: 0;
+        flex-direction: column;
+        background-color: rgba(18, 18, 18, 0.95);
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        border-bottom: 2px solid var(--color-primary);
+        padding: 20px 0;
+    }
+
+    .navbar ul.active {
+        left: 0; /* تظهر عند إضافة كلاس active */
+    }
+
+    .navbar ul li {
+        margin: 16px 0;
+    }
+}
